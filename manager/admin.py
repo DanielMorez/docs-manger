@@ -4,7 +4,7 @@ from . import models
 from . import resources
 
 from nested_admin.nested import NestedModelAdmin, NestedStackedInline
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 
 class EquipmentInline(NestedStackedInline):
@@ -13,7 +13,7 @@ class EquipmentInline(NestedStackedInline):
 
 
 @admin.register(models.Sector)
-class SectorAdmin(NestedModelAdmin, ImportExportModelAdmin):
+class SectorAdmin(NestedModelAdmin, ExportActionModelAdmin):
     list_display = ('title', 'order', 'manager',)
     search_fields = ('title', 'manager')
     inlines = (EquipmentInline,)
@@ -21,7 +21,7 @@ class SectorAdmin(NestedModelAdmin, ImportExportModelAdmin):
 
 
 @admin.register(models.Customer)
-class CustomerAdmin(ImportExportModelAdmin):
+class CustomerAdmin(ExportActionModelAdmin):
     list_display = ('title', 'kind', 'inn', 'email', 'address', 'phone',)
     search_fields = ('title', 'inn', 'email', 'address', 'phone')
     list_filter = ('kind',)
@@ -29,13 +29,13 @@ class CustomerAdmin(ImportExportModelAdmin):
 
 
 @admin.register(models.Resource)
-class ResourceAdmin(ImportExportModelAdmin):
+class ResourceAdmin(ExportActionModelAdmin):
     list_display = ('title', 'order', 'unit', 'quantity', 'cost', 'total',)
     resource_class = resources.ResourceResource
 
 
 @admin.register(models.Equipment)
-class EquipmentAdmin(ImportExportModelAdmin):
+class EquipmentAdmin(ExportActionModelAdmin):
     list_display = ('title', 'sector', 'serial', 'code', 'cost',)
     resource_class = resources.EquipmentResource
 
@@ -51,7 +51,7 @@ class TechnicalProcessInline(NestedStackedInline):
 
 
 @admin.register(models.Order)
-class OrderAdmin(NestedModelAdmin, ImportExportModelAdmin):
+class OrderAdmin(NestedModelAdmin, ExportActionModelAdmin):
     list_display = ('created', 'customer', 'ended', 'is_active', 'priority', 'text')
     list_editable = ('is_active',)
     search_fields = ('customer', 'text', 'created', 'ended')
@@ -61,7 +61,7 @@ class OrderAdmin(NestedModelAdmin, ImportExportModelAdmin):
 
 
 @admin.register(models.TechnicalProcess)
-class TechnicalProcessAdmin(ImportExportModelAdmin):
+class TechnicalProcessAdmin(ExportActionModelAdmin):
     list_display = ('title', 'booking', 'order', 'sector', 'text', 'form')
     search_fields = ('title', 'form'),
     list_filter = ('sector',)

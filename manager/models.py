@@ -1,5 +1,6 @@
 from manager.constants import UNITS, CUSTOMER_TYPES, PRIORITY, FORMS
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
@@ -24,9 +25,8 @@ class Customer(models.Model):
     address = models.TextField(
         verbose_name='Адрес'
     )
-    phone = models.CharField(
-        verbose_name='Номер телефона',
-        max_length=15
+    phone = PhoneNumberField(
+        verbose_name='Номер телефона'
     )
 
     class Meta:

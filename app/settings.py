@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # other apps
     'import_export',
+    'phonenumber_field',
     'rest_framework',
     'corsheaders',
     'manager'
@@ -160,5 +161,8 @@ STATICFILES_DIRS = (                                                # <- Зак�
 
 MEDIA_URL = '/data/'
 MEDIA_ROOT = CONFIG.PATHS["DATA_DIR"]
+
+IMPORT_EXPORT_IMPORT_PERMISSION_CODE = 'view'
+IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

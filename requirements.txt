@@ -6,3 +6,5 @@ django-nested-admin==3.4.0
 djangorestframework==3.13.1
 mysqlclient==2.1.0
 django-import-export==2.6.1
+phonenumbers==8.12.48
+django-phonenumber-field==6.1.0
