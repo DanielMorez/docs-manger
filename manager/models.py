@@ -133,13 +133,21 @@ class Equipment(models.Model):
         decimal_places=1,
         max_digits=7,
     )
+    quantity = models.PositiveSmallIntegerField(
+        verbose_name='Количество',
+        default=1
+    )
+
+    @property
+    def total(self):
+        return self.quantity * self.cost
 
     class Meta:
         verbose_name = _('Оборудование')
         verbose_name_plural = _('Оборудование')
 
     def __str__(self):
-        return f'{self.title} #{self.serial}'
+        return f'{self.title} #{self.serial} (общая сумма {self.total})'
 
 
 class Order(models.Model):

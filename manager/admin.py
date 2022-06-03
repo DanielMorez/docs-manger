@@ -36,7 +36,8 @@ class ResourceAdmin(ExportActionModelAdmin):
 
 @admin.register(models.Equipment)
 class EquipmentAdmin(ExportActionModelAdmin):
-    list_display = ('title', 'sector', 'serial', 'code', 'cost',)
+    list_display = ('title', 'sector', 'serial', 'code', 'cost', 'quantity', 'total')
+    list_editable = ('sector', 'serial', 'code', 'cost', 'quantity')
     resource_class = resources.EquipmentResource
 
 
