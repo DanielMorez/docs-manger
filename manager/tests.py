@@ -40,4 +40,4 @@ class ManagerTestCase(TestCase):
         try:
             self.customer.full_clean()
         except ValidationError as e:
-            print('Correctly validate phone')
+            print(f'Correctly validate phone: {e}')
