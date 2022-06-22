@@ -105,6 +105,8 @@ class Resource(models.Model):
     def total(self):
         return self.quantity * self.cost
 
+    total.fget.short_description = 'Итог'
+
 
 class Equipment(models.Model):
     sector = models.ForeignKey(
@@ -141,6 +143,8 @@ class Equipment(models.Model):
     @property
     def total(self):
         return self.quantity * self.cost
+
+    total.fget.short_description = 'Итог'
 
     class Meta:
         verbose_name = _('Оборудование')

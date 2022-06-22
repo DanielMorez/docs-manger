@@ -15,7 +15,9 @@ class EquipmentInline(NestedStackedInline):
 @admin.register(models.Sector)
 class SectorAdmin(NestedModelAdmin, ExportActionModelAdmin):
     list_display = ('title', 'order', 'manager',)
-    search_fields = ('title', 'manager')
+    search_fields = (
+        'title', 'manager__username', 'manager__email', 'manager__first_name', 'manager__last_name', 'order'
+    )
     inlines = (EquipmentInline,)
     resource_class = resources.SectorResource
 
@@ -31,13 +33,15 @@ class CustomerAdmin(ExportActionModelAdmin):
 @admin.register(models.Resource)
 class ResourceAdmin(ExportActionModelAdmin):
     list_display = ('title', 'order', 'unit', 'quantity', 'cost', 'total',)
+    search_fields = ('title', 'order')
     resource_class = resources.ResourceResource
 
 
 @admin.register(models.Equipment)
 class EquipmentAdmin(ExportActionModelAdmin):
     list_display = ('title', 'sector', 'serial', 'code', 'cost', 'quantity', 'total')
-    list_editable = ('sector', 'serial', 'code', 'cost', 'quantity')
+    # list_editable = ('sector', 'serial', 'code', 'cost', 'quantity')
+    search_fields = ('title', 'sector__title', 'serial', 'code', 'total')
     resource_class = resources.EquipmentResource
 
 
@@ -55,7 +59,7 @@ class TechnicalProcessInline(NestedStackedInline):
 class OrderAdmin(NestedModelAdmin, ExportActionModelAdmin):
     list_display = ('created', 'customer', 'ended', 'is_active', 'priority', 'text')
     list_editable = ('is_active',)
-    search_fields = ('customer', 'text', 'created', 'ended')
+    search_fields = ('customer__title', 'text', 'created', 'ended')
     list_filter = ('is_active', 'priority')
     inlines = (ResourceInline, TechnicalProcessInline,)
     resource_class = resources.OrderResource
@@ -64,6 +68,6 @@ class OrderAdmin(NestedModelAdmin, ExportActionModelAdmin):
 @admin.register(models.TechnicalProcess)
 class TechnicalProcessAdmin(ExportActionModelAdmin):
     list_display = ('title', 'booking', 'order', 'sector', 'text', 'form')
-    search_fields = ('title', 'form'),
+    search_fields = ('title', 'form')
     list_filter = ('sector',)
     resource_class = resources.TechnicalProcessResource
