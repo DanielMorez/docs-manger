@@ -55,12 +55,13 @@ class SectorResource(resources.ModelResource):
 
 
 class TechnicalProcessResource(resources.ModelResource):
-    booking = Field(attribute='booking__title')
+    client = Field(attribute='booking__customer__title')
     sector_name = Field(attribute='sector__title')
+    form = Field(attribute='get_form_display')
 
     class Meta:
         model = models.TechnicalProcess
         skip_unchanged = True
         report_skipped = True
         exclude = ('id',)
-        fields = ('title', 'order', 'booking' 'text', 'sector_name', 'form')
+        fields = ('title', 'order', 'client' 'text', 'sector_name', 'form')
